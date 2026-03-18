@@ -1,0 +1,254 @@
+{
+  "info": {
+    "name": "DWSC Actividad 3 - API sampleusers",
+    "description": "Colección de pruebas para la API RESTful de la asignatura Desarrollo Web Basado en Servicios y Componentes (DWSC).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET: Listar todos los usuarios (Ordenados por Username - C# LINQ)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Obtiene la lista de usuarios. El código C# se encarga de ordenarlos por Username usando `.OrderBy()` en memoria."
+      },
+      "response": []
+    },
+    {
+      "name": "2. GET: Listar usuarios negociando XML (Content Negotiation)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/xml",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Valida que el servidor pueda responder en formato XML si el cliente lo solicita mediante la cabecera `Accept: application/xml`."
+      },
+      "response": []
+    },
+    {
+      "name": "3. GET: Obtener un usuario específico por Username",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/users/jperez",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users",
+            "jperez"
+          ]
+        },
+        "description": "Recupera la información del usuario 'jperez' (HTTP 200 OK)."
+      },
+      "response": []
+    },
+    {
+      "name": "4. GET: Obtener un usuario inexistente (404 Not Found)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/users/usuario_fantasma",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users",
+            "usuario_fantasma"
+          ]
+        },
+        "description": "Intenta buscar un Username que no existe. Debería retornar HTTP 404."
+      },
+      "response": []
+    },
+    {
+      "name": "5. POST: Crear un nuevo usuario (201 Created)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"jdoe\",\r\n  \"password\": \"secret123\",\r\n  \"dni\": \"99887766Z\",\r\n  \"name\": \"John\",\r\n  \"surnames\": \"Doe\",\r\n  \"age\": 25\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Inserta un usuario válido. El servidor debería devolver un HTTP 201 Created junto a la URI del recurso en la cabecera Location."
+      },
+      "response": []
+    },
+    {
+      "name": "6. POST: Validar rechazo por Username duplicado (409 Conflict)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"jperez\",\r\n  \"password\": \"pass_nueva\",\r\n  \"dni\": \"00000000X\",\r\n  \"name\": \"Otro\",\r\n  \"surnames\": \"Juan\",\r\n  \"age\": 35\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Intenta crear un usuario con el 'username' jperez, que ya existe. Debe retornar 409 Conflict."
+      },
+      "response": []
+    },
+    {
+      "name": "7. POST: Validar rechazo por DNI duplicado (409 Conflict)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"nuevo_usuario\",\r\n  \"password\": \"123\",\r\n  \"dni\": \"11111111A\",\r\n  \"name\": \"Copia\",\r\n  \"surnames\": \"DNI\",\r\n  \"age\": 40\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Intenta crear un usuario con un DNI ('11111111A') que ya pertenece a 'jperez'. Debe retornar 409 Conflict."
+      },
+      "response": []
+    },
+    {
+      "name": "8. PUT: Actualizar usuario de forma exitosa (204 No Content)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"jdoe\",\r\n  \"password\": \"secret123_modificada\",\r\n  \"dni\": \"99887766Z\",\r\n  \"name\": \"John (Actualizado)\",\r\n  \"surnames\": \"Doe M.\",\r\n  \"age\": 26\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/users/jdoe",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users",
+            "jdoe"
+          ]
+        },
+        "description": "Actualiza el nombre, edad y password del usuario 'jdoe'. Retorna 204 No Content."
+      },
+      "response": []
+    },
+    {
+      "name": "9. DELETE: Eliminar un usuario permanentemente (204 No Content)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/users/jdoe",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "users",
+            "jdoe"
+          ]
+        },
+        "description": "Elimina el usuario recién creado 'jdoe'. Retorna 204 No Content."
+      },
+      "response": []
+    }
+  ]
+}
