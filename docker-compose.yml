@@ -3,9 +3,9 @@ services:
     image: postgres:latest
     container_name: universidad_postgres
     environment:
-      POSTGRES_DB: universidad_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: dwsc
+      POSTGRES_USER: estudiante
+      POSTGRES_PASSWORD: estudiante
     ports:
       - "5432:5432"
     volumes:

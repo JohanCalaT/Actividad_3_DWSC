@@ -1,17 +1,17 @@
--- Crear tabla de estudiantes
-CREATE TABLE IF NOT EXISTS estudiantes (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    carrera VARCHAR(100) NOT NULL,
-    semestre INT NOT NULL
+-- Crear tabla de sampleusers
+CREATE TABLE IF NOT EXISTS sampleusers (
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    dni VARCHAR(20) UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    surnames VARCHAR(100) NOT NULL,
+    age INT NOT NULL
 );
 
 -- Insertar datos iniciales
-INSERT INTO estudiantes (nombre, apellido, email, carrera, semestre) VALUES
-('Juan', 'Perez', 'juan.perez@universidad.edu', 'Ingeniería de Sistemas', 5),
-('Maria', 'Gomez', 'maria.gomez@universidad.edu', 'Derecho', 3),
-('Carlos', 'Rodriguez', 'carlos.rod@universidad.edu', 'Medicina', 8),
-('Ana', 'Martinez', 'ana.mtz@universidad.edu', 'Administración', 2),
-('Luis', 'Torres', 'luis.torres@universidad.edu', 'Psicología', 4);
+INSERT INTO sampleusers (username, password, dni, name, surnames, age) VALUES
+('jperez', 'pass123', '11111111A', 'Juan', 'Perez', 25),
+('mgomez', 'pass456', '22222222B', 'Maria', 'Gomez', 22),
+('crodriguez', 'pass789', '33333333C', 'Carlos', 'Rodriguez', 30),
+('amartinez', 'pass012', '44444444D', 'Ana', 'Martinez', 21),
+('ltorres', 'pass345', '55555555E', 'Luis', 'Torres', 24);

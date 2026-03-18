@@ -3,7 +3,8 @@ using UniversidadAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddXmlDataContractSerializerFormatters();
 builder.Services.AddDbContext<UniversidadContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
