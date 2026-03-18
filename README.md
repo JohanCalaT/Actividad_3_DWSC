@@ -1,82 +1,138 @@
-# Actividad 3 - DWSC
-## Proyecto Universidad: RESTful API .NET 10 + PostgreSQL
+# Actividad 3 - DWSC (Desarrollo Web Basado en Servicios y Componentes)
 
-Este proyecto es una actividad académica sobre servicios web RESTful. Implementa un sistema CRUD para gestionar información de estudiantes utilizando las tecnologías más recientes.
+Este proyecto desarrolla una API RESTful en **ASP.NET Core (.NET 10)** conectada a una base de datos **PostgreSQL** mediante Docker. Es la solución a la Actividad 3 de la asignatura, reemplazando la arquitectura original sugerida (Java EE / Jersey / WildFly) por tecnologías modernas de Microsoft.
 
-## 🚀 Tecnologías
-- **.NET 10** (ASP.NET Core Web API)
-- **PostgreSQL** (Docker Desktop)
-- **Entity Framework Core** (Npgsql)
-- **Swagger/OpenAPI** (Documentación Interactiva)
+La API permite realizar operaciones CRUD sobre una tabla `sampleusers`.
 
 ---
 
-## 📚 Respuestas Teóricas
+## 🚀 Requisitos Previos e Instalación
 
-1. **¿Qué es un servicio web y cuáles son sus características?**
-   Es un sistema de software diseñado para soportar la interacción interoperable máquina a máquina sobre una red. Sus características incluyen: interoperabilidad, uso de protocolos estándar (HTTP), y descripción de servicios.
+Para que el proyecto funcione al clonarlo, debes asegurarte de tener instaladas las siguientes herramientas en tu máquina local:
 
-2. **¿Diferencia entre SOAP y REST?**
-   **SOAP** es un protocolo rígido basado en XML que usa WSDL para definirse. **REST** es un estilo arquitectónico más flexible que usa diversos formatos (principalmente JSON), es más ligero y utiliza directamente los verbos HTTP.
+### 1. Instalar .NET 10 SDK
+El código fue escrito utilizando **ASP.NET Core 10**. Debes descargar e instalar el SDK correspondiente a tu sistema operativo.
+- **Descarga oficial:** [Página de descargas de .NET](https://dotnet.microsoft.com/download)
+- Para verificar que se instaló correctamente, abre una terminal y ejecuta:
+  ```bash
+  dotnet --version
+  ```
 
-3. **¿Qué son los métodos HTTP y para qué sirve cada uno?**
-   - **GET**: Recuperar información.
-   - **POST**: Crear un nuevo recurso.
-   - **PUT**: Actualizar un recurso existente de forma completa.
-   - **DELETE**: Eliminar un recurso.
+### 2. Instalar Docker Desktop
+La base de datos PostgreSQL se ejecuta dentro de un contenedor Docker para aislar las dependencias y facilitar la ejecución.
+- **Descarga oficial:** [Página de descargas de Docker](https://www.docker.com/products/docker-desktop)
+- Verifica la instalación ejecutando:
+  ```bash
+  docker --version
+  docker compose version
+  ```
 
-4. **¿Qué es JSON y por qué se usa en REST?**
-   JavaScript Object Notation. Se usa por ser ligero, fácil de leer por humanos y máquinas, y ser el estándar de facto para la comunicación en la web moderna.
-
-5. **¿Qué es ASP.NET Core Web API vs Jersey?**
-   ASP.NET Core es el framework de Microsoft para construir APIs en C#. Jersey es la implementación de referencia de JAX-RS para Java. Ambos sirven el mismo propósito: simplificar la creación de servicios REST.
-
-6. **¿Qué es Entity Framework Core?**
-   Es un mapeador objeto-relacional (ORM) que permite a los desarrolladores trabajar con bases de datos usando objetos de .NET, eliminando la necesidad de escribir la mayor parte del código SQL.
-
-7. **¿Qué es una API RESTful y sus principios?**
-   Es una API que sigue los principios de REST: arquitectura cliente-servidor, sin estado (stateless), cacheable, sistema de capas e interfaz uniforme.
-
-8. **¿Qué es Swagger/OpenAPI?**
-   Es un conjunto de herramientas para documentar, visualizar y probar APIs REST de forma interactiva directamente desde el navegador.
-
-9. **¿Qué son los códigos de estado HTTP?**
-   Son respuestas numéricas del servidor (ej: 200, 404, 500) que indican el resultado de una solicitud. Son vitales en REST para que el cliente sepa exactamente qué ocurrió sin analizar el cuerpo de la respuesta.
-
-10. **¿Por qué Docker para la BD?**
-    Permite encapsular la base de datos con toda su configuración en un contenedor, garantizando que funcione igual en cualquier máquina sin necesidad de instalaciones manuales.
+### 3. Git
+Para clonar este repositorio:
+- **Descarga oficial:** [Git-SCM](https://git-scm.com/downloads)
 
 ---
 
-## 🛠️ Instalación y Ejecución
+## 🛠️ Tutorial: Cómo Ejecutar el Proyecto
 
-### Requisitos Previos
-- Docker Desktop
-- .NET 10 SDK
+Sigue estos pasos cuidadosamente tras clonar el repositorio:
 
-### Pasos
-1. **Clonar el repositorio.**
-2. **Levantar la base de datos:**
-   ```bash
-   docker-compose up -d
-   ```
-3. **Ejecutar la API:**
-   ```bash
-   cd UniversidadAPI
-   dotnet run
-   ```
-4. **Acceder a Swagger:**
-   Vaya a `http://localhost:5000/swagger` (o el puerto indicado en la consola) para probar los endpoints.
+### Paso 1: Clonar el Repositorio
+Abre una terminal y ejecuta:
+```bash
+git clone https://github.com/Johan-M-Developer/Actividad_3_DWSC.git
+cd Actividad_3_DWSC
+```
+
+### Paso 2: Levantar la Base de Datos
+La configuración de Docker Compose levantará una instancia de PostgreSQL en el puerto `5432` con la base de datos `dwsc` e inicializará automáticamente la tabla `sampleusers`.
+```bash
+docker compose up -d
+```
+*(Nota: Docker descargará la imagen de PostgreSQL si es la primera vez que lo ejecutas).*
+
+### Paso 3: Ejecutar la API
+Entra en la carpeta del proyecto C# e inicia el servidor de desarrollo (Kestrel):
+```bash
+cd UniversidadAPI
+dotnet run
+```
+La consola te indicará la URL donde Kestrel está escuchando (por lo general, `http://localhost:5000` o `https://localhost:5001`). 
+
+### Paso 4: (Opcional) Interactuar mediante Swagger
+Puedes abrir en tu navegador:
+`http://localhost:5000/swagger`
+para interactuar gráficamente con la API.
 
 ---
 
-## 🧪 Guía de Pruebas (cURL)
+## 📚 Respuestas Teóricas de la Práctica
 
-| Acción | Comando | Código Esperado |
-|--------|---------|-----------------|
-| GET Todos | `curl -X GET http://localhost:5000/api/estudiantes` | 200 OK |
-| GET ID 1 | `curl -X GET http://localhost:5000/api/estudiantes/1` | 200 OK |
-| POST Crear | `curl -X POST http://localhost:5000/api/estudiantes -H "Content-Type: application/json" -d '{"nombre":"Luis","apellido":"Paz","email":"luis.paz@mail.com","carrera":"Arte","semestre":1}'` | 201 Created |
-| PUT Act. | `curl -X PUT http://localhost:5000/api/estudiantes/1 -H "Content-Type: application/json" -d '{"id":1,"nombre":"Juan Modificado",...}'` | 204 No Content |
-| DELETE | `curl -X DELETE http://localhost:5000/api/estudiantes/1` | 204 No Content |
-| Error 404 | `curl -X GET http://localhost:5000/api/estudiantes/999` | 404 Not Found |
+A continuación se responden las preguntas solicitadas en la guía del profesor sobre la adaptación de este código:
+
+### Justificación de Infraestructura (.NET vs Java EE)
+
+**Kestrel vs. WildFly:**
+WildFly es un servidor de aplicaciones completo nativo de Java EE diseñado para alojar múltiples aplicaciones (ficheros `.war`). Kestrel subvierte ese paradigma: en ASP.NET Core, la aplicación es un ejecutable independiente de consola que trae embebido su propio servidor web optimizado (Kestrel). Al usar `dotnet run`, Kestrel escucha las peticiones HTTP directamente, sin necesidad de instalar o mantener un servidor externo en el sistema anfitrión.
+
+**¿Por qué en .NET no existe el archivo `web.xml`?**
+El archivo `web.xml` (Deployment Descriptor) es específico de la especificación Servlets en Java. .NET Core posee una filosofía de configuración moderna basada en código (`Program.cs`) y JSON (`appsettings.json`), configurando su *pipeline* de middleware dinámicamente en RAM.
+
+### Cuestionario de la Actividad
+
+**Pregunta A: ¿En qué formato se obtienen los datos al acceder a un usuario específico y por qué?**
+Por defecto, se obtienen en **JSON**. En ASP.NET Core, el pipeline configurado por `AddControllers()` inyecta serializadores de JSON de forma nativa. Sin embargo, **nuestro código ha sido adaptado con `AddXmlDataContractSerializerFormatters()`** para habilitar el Content Negotiation. Esto significa que si el cliente solicita explícitamente `Accept: application/xml`, la API responderá con un XML estructurado.
+
+**Pregunta B: ¿Cómo se definen qué códigos de estado (200, 400, etc.) deben devolverse en cada operación?**
+En los controladores de Web API que heredan de `ControllerBase`, los códigos HTTP se determinan retornando diferentes clases derivadas de `ActionResult`. 
+- `Ok()` devuelve un **200 OK**.
+- `NotFound()` devuelve un **404 Not Found**.
+- `BadRequest()` devuelve un **400 Bad Request**.
+- `NoContent()` devuelve un **204 No Content** (útil tras eliminar/actualizar).
+- `CreatedAtAction()` devuelve un **201 Created** junto con la URI del nuevo recurso.
+- `Conflict()` devuelve un **409 Conflict** (usado al intentar insertar `username` o `dni` duplicados).
+
+**Pregunta C: ¿Es posible cambiar el orden de los usuarios sin cambiar la consulta SQL? ¿Cómo se hace en el código?**
+**Sí, es plenamente posible usando C# LINQ.**
+En nuestro método GET, hemos resuelto este requisito de la siguiente forma: 
+1. Realizamos el acceso asíncrono `await _context.Usuarios.ToListAsync();`. Esto ejecuta un `SELECT * FROM sampleusers` simple en SQL y materializa la respuesta completa en la memoria del servidor.
+2. Posteriormente, aplicamos `.OrderBy(u => u.Username).ToList()` a esa lista en la memoria de C#, logrando el ordenamiento deseado sin manipular el query enviado a PostgreSQL.
+
+---
+
+## 🧪 Guía de Pruebas (cURL y Content Negotiation)
+
+Asegúrate de tener la API corriendo. Aquí se exponen los comandos para probar el funcionamiento integral:
+
+### 1. Obtener Lista de Usuarios (Por defecto JSON)
+*Podrás notar que están ordenados alfabéticamente por 'username'.*
+```bash
+curl -X GET http://localhost:5000/api/users
+```
+
+### 2. Obtener Lista de Usuarios (Forzando XML)
+*Demuestra el "Content Negotiation".*
+```bash
+curl -X GET http://localhost:5000/api/users -H "Accept: application/xml"
+```
+
+### 3. Obtener Usuario Específico
+```bash
+curl -X GET http://localhost:5000/api/users/jperez
+```
+
+### 4. Insertar Usuario Exitosamente
+```bash
+curl -X POST http://localhost:5000/api/users \
+-H "Content-Type: application/json" \
+-d '{"username":"nuevoUser","password":"123","dni":"99887766X","name":"Pedro","surnames":"Paramo","age":40}'
+# Devuelve HTTP 201 Created
+```
+
+### 5. Probar Validación (Fallo Intencional por DNI Duplicado)
+```bash
+curl -X POST http://localhost:5000/api/users \
+-H "Content-Type: application/json" \
+-d '{"username":"otroUser","password":"123","dni":"99887766X","name":"Fallara","surnames":"Seguro","age":20}'
+# Devuelve HTTP 409 Conflict: "El DNI ya existe."
+```
