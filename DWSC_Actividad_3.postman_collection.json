@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "DWSC Actividad 3 - API sampleusers",
-    "description": "Colección de pruebas para la API RESTful de la asignatura Desarrollo Web Basado en Servicios y Componentes (DWSC).",
+    "description": "Colección de pruebas paramtrizada para la API RESTful de la asignatura Desarrollo Web Basado en Servicios y Componentes (DWSC).",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -17,12 +17,10 @@
           }
         ],
         "url": {
-          "raw": "http://localhost:5000/api/users",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users"
@@ -44,12 +42,10 @@
           }
         ],
         "url": {
-          "raw": "http://localhost:5000/api/users",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users"
@@ -65,12 +61,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/api/users/jperez",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users/jperez",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users",
@@ -87,12 +81,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/api/users/usuario_fantasma",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users/usuario_fantasma",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users",
@@ -119,12 +111,10 @@
           "raw": "{\r\n  \"username\": \"jdoe\",\r\n  \"password\": \"secret123\",\r\n  \"dni\": \"99887766Z\",\r\n  \"name\": \"John\",\r\n  \"surnames\": \"Doe\",\r\n  \"age\": 25\r\n}"
         },
         "url": {
-          "raw": "http://localhost:5000/api/users",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users"
@@ -150,12 +140,10 @@
           "raw": "{\r\n  \"username\": \"jperez\",\r\n  \"password\": \"pass_nueva\",\r\n  \"dni\": \"00000000X\",\r\n  \"name\": \"Otro\",\r\n  \"surnames\": \"Juan\",\r\n  \"age\": 35\r\n}"
         },
         "url": {
-          "raw": "http://localhost:5000/api/users",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users"
@@ -181,12 +169,10 @@
           "raw": "{\r\n  \"username\": \"nuevo_usuario\",\r\n  \"password\": \"123\",\r\n  \"dni\": \"11111111A\",\r\n  \"name\": \"Copia\",\r\n  \"surnames\": \"DNI\",\r\n  \"age\": 40\r\n}"
         },
         "url": {
-          "raw": "http://localhost:5000/api/users",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users"
@@ -212,12 +198,10 @@
           "raw": "{\r\n  \"username\": \"jdoe\",\r\n  \"password\": \"secret123_modificada\",\r\n  \"dni\": \"99887766Z\",\r\n  \"name\": \"John (Actualizado)\",\r\n  \"surnames\": \"Doe M.\",\r\n  \"age\": 26\r\n}"
         },
         "url": {
-          "raw": "http://localhost:5000/api/users/jdoe",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users/jdoe",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users",
@@ -234,12 +218,10 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/api/users/jdoe",
-          "protocol": "http",
+          "raw": "{{base_url}}/api/users/jdoe",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users",
@@ -249,6 +231,14 @@
         "description": "Elimina el usuario recién creado 'jdoe'. Retorna 204 No Content."
       },
       "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string",
+      "description": "Base URL of the API"
     }
   ]
 }

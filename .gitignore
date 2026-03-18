@@ -50,3 +50,6 @@ Thumbs.db
 # !appsettings.json
 # !appsettings.Development.json
 
+# Local scripts
+Guion_Exposicion_DWSC.md
+
