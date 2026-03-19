@@ -9,12 +9,12 @@ namespace UniversidadAPI.Data
         {
         }
 
-        public DbSet<Usuario> Usuarios { get; set; } = null!;
+        public DbSet<User> Usuarios { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Usuario>().ToTable("sampleusers");
+            modelBuilder.Entity<User>().ToTable("sampleusers");
         }
     }
 }

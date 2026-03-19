@@ -1,0 +1,36 @@
+@model List<UniversidadAPI.Models.User>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <div>
+        <h1>Lista de Usuarios</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>DNI</th>
+                    <th>Name</th>
+                    <th>Surnames</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Dni</td>
+                        <td>@user.Name</td>
+                        <td>@user.Surnames</td>
+                        <td>@user.Age</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

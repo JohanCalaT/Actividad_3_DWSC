@@ -1,0 +1,17 @@
+.user-card {
+    font-family: roboto, sans-serif;
+    max-width: 420px;
+    margin: 40px auto;
+    border: 1px solid #617563;
+    border-radius: 8px;
+    padding: 24px 32px;
+    background: #f9f9f9;
+}
+.user-card h2 {
+    color: #617563;
+    margin-bottom: 16px;
+}
+dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 0; }
+dt { font-weight: bold; color: #444; }
+dd { margin: 0; color: #222; }
+a  { display: inline-block; margin-top: 20px; color: #617563; }

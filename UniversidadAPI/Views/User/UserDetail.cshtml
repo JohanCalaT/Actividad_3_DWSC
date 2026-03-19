@@ -1,0 +1,20 @@
+@model UniversidadAPI.Models.User
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Detail</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/detail.css" />
+</head>
+<body>
+    <div class="user-card">
+        <h2>@Model.Name @Model.Surnames</h2>
+        <dl>
+            <dt>Username</dt><dd>@Model.Username</dd>
+            <dt>DNI</dt>     <dd>@Model.Dni</dd>
+            <dt>Age</dt>     <dd>@Model.Age</dd>
+        </dl>
+        <a href="/userstable">← Back to list</a>
+    </div>
+</body>
+</html>

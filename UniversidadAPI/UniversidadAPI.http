@@ -1,6 +1,57 @@
 @UniversidadAPI_HostAddress = http://localhost:5121
 
-GET {{UniversidadAPI_HostAddress}}/weatherforecast/
+### GET all users (JSON)
+GET {{UniversidadAPI_HostAddress}}/users
 Accept: application/json
 
-###
+### GET all users (HTML Table)
+GET {{UniversidadAPI_HostAddress}}/userstable
+Accept: text/html
+
+### GET specific user (JSON)
+GET {{UniversidadAPI_HostAddress}}/users/jperez
+Accept: application/json
+
+### GET specific user (HTML Detail)
+GET {{UniversidadAPI_HostAddress}}/users/jperez/view
+Accept: text/html
+
+### POST new user (JSON)
+POST {{UniversidadAPI_HostAddress}}/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "newuser",
+    "password": "password123",
+    "dni": "12345678X",
+    "name": "New",
+    "surnames": "User",
+    "age": 25
+}
+
+### POST user with duplicate username (Conflict)
+POST {{UniversidadAPI_HostAddress}}/users
+Content-Type: application/json
+
+{
+    "username": "jperez",
+    "password": "password123",
+    "dni": "99999999Z",
+    "name": "Duplicate",
+    "surnames": "Username",
+    "age": 30
+}
+
+### POST user with duplicate DNI (Conflict)
+POST {{UniversidadAPI_HostAddress}}/users
+Content-Type: application/json
+
+{
+    "username": "uniqueuser",
+    "password": "password123",
+    "dni": "11111111A",
+    "name": "Duplicate",
+    "surnames": "DNI",
+    "age": 30
+}
